@@ -1,18 +1,15 @@
 #include "esp_common.h"
-
 #include "gpio.h"
-
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
+#include "uart.h"
+#include "i2c_master.h"
 
 //size of the array that contain S0 S1 S2
 #define arraySize 3
-
 //number of flex sensor
 #define flexNumber 5
-
 // S1, S2, S3
-
 #define PIN_S0 5
 #define PIN_GPIO_MUX5 PERIPHS_IO_MUX_GPIO5_U
 #define PIN_GPIO_FUNC5 FUNC_GPIO5
@@ -28,7 +25,14 @@
 const static uint8_t SxPinArray[3] = {PIN_S0,PIN_S1,PIN_S2};
 const static uint SxPinMux[3] = {PERIPHS_IO_MUX_GPIO5_U,PERIPHS_IO_MUX_GPIO0_U,PERIPHS_IO_MUX_GPIO4_U};
 const static char* SxPinFunction[3] = {PIN_GPIO_FUNC5,PIN_GPIO_FUNC0,PIN_GPIO_FUNC4};
-uint16_t *FlexValueArray = NULL;
+int *FlexValueArray = NULL;
+
+//all the code in order for the multiplexer (that correspond to the code for S0 S1 S2)
+const static int Code_y0 [3] = {0,0,0};
+const static int Code_y1 [3] = {0,0,1};
+const static int Code_y2 [3] = {0,1,0};
+const static int Code_y3 [3] = {0,1,1};
+const static int Code_y4 [3] = {1,0,0};
 
 /******************************************************************************
  * FunctionName : user_init
@@ -72,72 +76,73 @@ void ICACHE_FLASH_ATTR user_rf_pre_init(void)
 {
 }
 
-char* ICACHE_FLASH_ATTR getBin(int num)
-{
-  char * str = (char*)malloc(3*sizeof(char));
+void ICACHE_FLASH_ATTR displayValues(void){
 
-  *(str+5) = '\0';
-  int mask = 0x10 << 1;
-  while(mask >>= 1)
-    *str++ = !!(mask & num) + '0';
-  return str;
-}
-
-void ICACHE_FLASH_ATTR value_yx(void *pvParameters){
-  int nbr = (int)pvParameters;
-  char* bin = getBin(nbr);
-  uint8_t i = strlen(bin);
-
-  GPIO_OUTPUT_SET(SxPinArray[0], bin[i-1]);
-  GPIO_OUTPUT_SET(SxPinArray[1], bin[i-2]);
-  GPIO_OUTPUT_SET(SxPinArray[2], bin[i-3]);
-  FlexValueArray[0] = system_adc_read();
-}
-
-void ICACHE_FLASH_ATTR m_value_y0(void *pvParameters){
-  GPIO_OUTPUT_SET(SxPinArray[0], 0);
-  GPIO_OUTPUT_SET(SxPinArray[1], 0);
-  GPIO_OUTPUT_SET(SxPinArray[2], 0);
-  FlexValueArray[0] = system_adc_read();
-
-}
-
-void ICACHE_FLASH_ATTR m_value_y1(void *pvParameters){
-  GPIO_OUTPUT_SET(SxPinArray[0], 1);
-  GPIO_OUTPUT_SET(SxPinArray[1], 0);
-  GPIO_OUTPUT_SET(SxPinArray[2], 0);
-  FlexValueArray[1] = system_adc_read();
-}
-
-void ICACHE_FLASH_ATTR displayValues(){
   printf("Y0\tY1\tY2\tY3\tY4\tY5\tY6\tY7");
+  printf("\n");
   printf("---\t---\t---\t---\t---\t---\t---\t---");
-  for(uint8_t i = 0; i < flexNumber; i++){
+  printf("\n");
+
+  for(int i = 0; i < flexNumber; i++){
     printf("%d\t",FlexValueArray[i]);
-    printf("\n");
   }
+  printf("\n");
+  vTaskDelay(5000);
+
+  }
+
+//according to the value of pvParameters (4th parametr in xTaskCreate()), get the correct the value on the correct pin
+void ICACHE_FLASH_ATTR value_yx(void *pvParameters){
+
+  int *tab = NULL;
+  switch((int)pvParameters){
+
+    case 0 : tab = (int*)Code_y0;
+    break;
+    case 1 : tab = (int*)Code_y1;
+    break;
+    case 2 : tab = (int*)Code_y2;
+    break;
+    case 3:  tab = (int*)Code_y3;
+    break;
+    case 4:  tab = (int*)Code_y4;
+    break;
+    default:
+    break;
+  }
+
+  //modify S0 -> S2
+  GPIO_OUTPUT_SET(SxPinArray[0], tab[0]);
+  GPIO_OUTPUT_SET(SxPinArray[1], tab[1]);
+  GPIO_OUTPUT_SET(SxPinArray[2], tab[2]);
+
+  //get the analogic value for the correpsonding output
+  FlexValueArray[(int)pvParameters] = system_adc_read();
+  printf("analog value : %d", FlexValueArray[(int)pvParameters]);
 }
 
 void ICACHE_FLASH_ATTR user_init(void)
 {
-  FlexValueArray = (uint16_t*)malloc(flexNumber*sizeof(FlexValueArray));
+
+  //flex array declaration
+  FlexValueArray = (int*)malloc(flexNumber*sizeof(int));
 
 //definition
   PIN_FUNC_SELECT(PIN_GPIO_MUX5, PIN_GPIO_FUNC5);
   PIN_FUNC_SELECT(PIN_GPIO_MUX0, PIN_GPIO_FUNC0);
   PIN_FUNC_SELECT(PIN_GPIO_MUX4, PIN_GPIO_FUNC4);
 
-//avec premières fonctions
-  //xTaskCreate(&m_value_y0, (signed char*)"y0", 256, NULL, 2, NULL);
-  //xTaskCreate(&m_value_y1, (signed char*)"y1", 256, NULL, 2, NULL);
+
 //create all the tasks for each
   xTaskCreate(&value_yx, (signed char*)"y0", 256, (void*) 0, 2, NULL);
   xTaskCreate(&value_yx, (signed char*)"y1", 256, (void*) 1, 2, NULL);
   xTaskCreate(&value_yx, (signed char*)"y2", 256, (void*) 2, 2, NULL);
   xTaskCreate(&value_yx, (signed char*)"y3", 256, (void*) 3, 2, NULL);
   xTaskCreate(&value_yx, (signed char*)"y4", 256, (void*) 4, 2, NULL);
+//xTaskCreate(&displayValues, (signed char*)"display",256,NULL,6,NULL);
+
 
 //delay de 500ms
-  xTaskCreate(&displayValues ,(signed char*)"display" ,256 ,NULL ,2 ,NULL);
+//  xTaskCreate(&displayValues ,(signed char*)"display" ,256 , NULL ,2 ,NULL);
 
 }

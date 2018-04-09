@@ -1,31 +1,45 @@
-# STEPS OF THE PROJECT :
+<center> <h1>STEPS OF THE PROJECT :</h1> </center>
 
 ## STEP 1 :
-GET ALL THE ANALOG VALUES OF THE FLEX SENSORS USING THE 74HC4051 MULTIPLEXER
+Get all the analog values of the flex sensors using the 74HC4051 multiplexer
 
 ## STEP 2 :
- SET THE COMMUNICATION BETWEEN THE 2 ESP8266 (CLIENT-SERVER) WITH THE GLOVE AS THE SERVER AND THE 3D PRINTED HAND AS THE CLIENT :
+ Set the communication between the 2 esp8266 (client-server) with the glove as the server and the 3d printed hand as the client :
 
 ## STEP 3 :
-SEND THE VALUES FROM THE SERVER TO THE CLIENT
+Send the values from the server to the client
 
-# THIS IS STEP 1 ONLY
+<center>
+ <h1>THIS IS STEP 1 ONLY</h1>
+ <img src="https://media.giphy.com/media/B0uJ6d5OXb50k/giphy.gif" width=10% title="Github Logo">
+ </center>
 
 #### Components :
+* used :
+  * ESP8266 Thing Dev (x1)
+  * Flex Sensors (x5)
+  * 47 kΩ resistors (x5)
+  * 74HC4051 multiplexer (x1)
+  * Wires
 
-* ESP8266 Thing Dev (x1)
-* Flex Sensors (x5)
-* 74HC4051 multiplexer (x1)
-* Wires
 
-* Initially used :
+* not used :
+  * MPU6050 6 DOF IMU (x2) :  
+Because we encountered some problems :
+the I2C bus on the ESP8266 is software not hardware, it means that the driver for I2C  will  be responsible of the delay regulations between the ESP8266 and the I2C sensors. (to regulate the communication between the two). We have Tested the I2C driver APPROVED by Espressif (because there is no official I2C driver from Espressif) and other drivers made by internet programers
+
+*to do :
+ * change all the resistors
+ * add
 
 #### Schematic :
 
-![Fritzing](img/fritzing.png "Schematic")
+<p align=center>
+<img src="img/fritzing.png" title="Github Logo">
+</p>
 
 
-#### files organization :
+#### Files Organization :
 
 * flex final
 * img
@@ -42,10 +56,11 @@ SEND THE VALUES FROM THE SERVER TO THE CLIENT
 
 
 
-
 #### NOTE :
 
 - For pin declaration :
 
-You can find all the Pin mux register and functions in the file
+You can find all the Pin mux register and functions in the file :
+ ```
 $PlatformIO_Folder/framework-esp8266-rtos-sdk/include/espressif/esp8266/pin_mux_register.h
+ ```

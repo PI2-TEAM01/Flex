@@ -4,10 +4,13 @@
 Get all the analog values of the flex sensors using the 74HC4051 multiplexer
 
 ## STEP 2 :
- Set the communication between the 2 esp8266 (client-server) with the glove as the server and the 3d printed hand as the client :
+ Set the communication between the 2 esp8266 (client-server) with the glove as the server and the 3d printed hand as the client
 
 ## STEP 3 :
-Send the values from the server to the client
+Send all the values from the server to the client :
+* The two ESP8266 connect to the access point
+* Server starts
+* Each time the client connects  to the server, the server sends data
 
 <center>
  <h1>THIS IS STEP 1 ONLY</h1>
@@ -42,7 +45,7 @@ Send the values from the server to the client
       * [MPU6050 Datasheet](https://store.invensense.com/datasheets/invensense/MPU-6050_DataSheet_V3%204.pdf)  
 
 Because we encountered some problems :
-the I2C bus on the ESP8266 is software not hardware, it means that the driver for I2C  will  be responsible of the delay regulations between the ESP8266 and the I2C sensors. (to regulate the communication between the two). We have Tested the I2C driver APPROVED by Espressif (because there is no official I2C driver from Espressif) and other drivers made by internet programers
+the I2C bus on the ESP8266 is software not hardware, it means that the driver for I2C  will  be responsible of the delay regulations between the ESP8266 and the I2C sensors. (to regulate the communication between the two). We have Tested the I2C driver APPROVED by Espressif (because there is no official I2C driver from Espressif) and other drivers made by internet programers but without success.
 
 
 * To Do :
@@ -50,17 +53,23 @@ the I2C bus on the ESP8266 is software not hardware, it means that the driver fo
         * [ESP32 Ressources](https://www.espressif.com/en/products/hardware/esp32/resources)
 
 
-   * Change all the resistors
-   * Add OP Amp(s)
-   * Add a Battery (and add also a JST connector with it )
-       * [JST Connector](https://www.sparkfun.com/products/9749)
+ * Change all the resistors
+ * Add OP Amp(s)
+ * Add a Battery (and add also a JST connector with it )
+     * https://www.sparkfun.com/products/9749
+
+
+#### Preview :
+
+<p align=center>
+<img src="img/project.jpg" title="Github Logo">
+</p>
 
 #### Schematic :
 
 <p align=center>
 <img src="img/fritzing.png" title="Github Logo">
 </p>
-
 
 
 #### Files Organization :
@@ -74,10 +83,22 @@ the I2C bus on the ESP8266 is software not hardware, it means that the driver fo
     * flex.h
 * src
     * main.c
-* .gitignore
-* .travis.yml
 * platformio.ini
 
+
+#### Getting Started
+
+1. Install [Atom](https://atom.io/)
+2. Install [PlatformIO](https://platformio.org/get-started/ide?install=atom)
+3. Then clone the repository
+```
+git clone https://github.com/PI2-TEAM01/Flex
+```
+
+4. Open the folder with platformIO
+<p align=center>
+<img src="img/open_project.png" title="Github Logo">
+</p>
 
 
 #### NOTE :
@@ -88,17 +109,18 @@ the I2C bus on the ESP8266 is software not hardware, it means that the driver fo
 /home/$Your_Personal_Folder/.platformio/packages/framework-esp8266-rtos-sdk/include/espressif/esp8266/pin_mux_register.h
  ```
 
-* If you used ESPCONN objects and that you uploaded a new piece of code to the ESP8266 (that don't own ESPCONN objects at all), you will see that informations about network are still printed in the serial monitor ...
-So in order to delete these parameters you need to execute in the user_init() the single line :
+* If you used ESPCONN objects and that you uploaded a new piece of code to the ESP8266 (that don't use ESPCONN objects at all), you will see that informations about network are still printed in the serial monitor ...
+In order to delete these parameters you need to execute in the user_init() the single line :
 
  ```
 void user_init(void) {
    system_restore();
   }
   ```
-  It will restore the configuration of the ESP including the ESPCONN objects.
+  It will restore the configuration of the ESP including network configuration.
 * If you have UPLOAD ERROR(S) :
-  * connect the Pin 0 of the ESP8266 to the Gnd
-  * Turn off
-  * Turn on
-  * retry (it should work now)
+  1. Connect the Pin 0 of the ESP8266 to the Ground
+  2. Turn off
+  3. Turn on
+  4. Upload again (it should work now)
+  5. If it doesn't work change your USB port

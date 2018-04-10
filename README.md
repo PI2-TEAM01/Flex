@@ -27,19 +27,19 @@ Send the values from the server to the client
 
 
   * Flex Sensors (x5)
-   * [Flex Sensors Datasheet](https://cdn.sparkfun.com/datasheets/Sensors/ForceFlex/FLEX%20SENSOR%20DATA%20SHEET%202014.pdf)
+      * [Flex Sensors Datasheet](https://cdn.sparkfun.com/datasheets/Sensors/ForceFlex/FLEX%20SENSOR%20DATA%20SHEET%202014.pdf)
 
 * 47 kΩ resistors (x5)
 
 * 74HC4051 multiplexer (x1)
- * [74HC4051 Datasheet](https://assets.nexperia.com/documents/data-sheet/74HC_HCT4051.pdf)
+    * [74HC4051 Datasheet](https://assets.nexperia.com/documents/data-sheet/74HC_HCT4051.pdf)
 
-  * Wires
+* Wires
 
 
 * Not used :
   * MPU6050 6 DOF IMU (x2)
-   * [MPU6050 Datasheet](https://store.invensense.com/datasheets/invensense/MPU-6050_DataSheet_V3%204.pdf)  
+      * [MPU6050 Datasheet](https://store.invensense.com/datasheets/invensense/MPU-6050_DataSheet_V3%204.pdf)  
 
 Because we encountered some problems :
 the I2C bus on the ESP8266 is software not hardware, it means that the driver for I2C  will  be responsible of the delay regulations between the ESP8266 and the I2C sensors. (to regulate the communication between the two). We have Tested the I2C driver APPROVED by Espressif (because there is no official I2C driver from Espressif) and other drivers made by internet programers

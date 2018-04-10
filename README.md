@@ -1,4 +1,6 @@
-<center> <h1>STEPS OF THE PROJECT :</h1> </center>
+<p align=center>
+<h1>STEPS OF THE PROJECT :</h1>
+</p>
 
 ## STEP 1 :
 Get all the analog values of the flex sensors using the 74HC4051 multiplexer
@@ -17,34 +19,28 @@ Reception of server data on the client-side and action of servo motors according
 
 <center>
  <h1>THIS IS STEP 1 ONLY</h1>
- <img src="https://media.giphy.com/media/B0uJ6d5OXb50k/giphy.gif" width=10% title="Github Logo">
+ <img src="https://media.giphy.com/media/B0uJ6d5OXb50k/giphy.gif" width=10% title="Warning">
  </center>
 
 
 
 #### Components :
-* used :
-  * ESP8266 Thing Dev (x1)
-     * [ESP8266 Datasheet](https://www.espressif.com/sites/default/files/documentation/0a-esp8266ex_datasheet_en.pdf)
-     * [ESP8266 Thing Dev Graphical Datasheet](https://cdn.sparkfun.com/datasheets/Wireless/WiFi/ESP8266ThingDevV1.pdf)
-     * [ESP8266 Thing Dev Schematic](https://cdn.sparkfun.com/datasheets/Wireless/WiFi/ESP8266-Thing-Dev-v10.pdf)
-     * [ESP8266 Thin Dev Hookup Guide](https://learn.sparkfun.com/tutorials/esp8266-thing-development-board-hookup-guide?_ga=2.220320347.2139293805.1523318758-2093697505.1519119166)
-     * [ESP8266 Pin List](https://www.espressif.com/sites/default/files/documentation/0d-esp8266_pin_list_release_15-11-2014.xlsx)
-
-
-  * Flex Sensors (x5)
+* Used :
+    * ESP8266 Thing Dev (x1)
+       * [ESP8266 Datasheet](https://www.espressif.com/sites/default/files/documentation/0a-esp8266ex_datasheet_en.pdf)
+       * [ESP8266 Thing Dev Graphical Datasheet](https://cdn.sparkfun.com/datasheets/Wireless/WiFi/ESP8266ThingDevV1.pdf)
+       * [ESP8266 Thing Dev Schematic](https://cdn.sparkfun.com/datasheets/Wireless/WiFi/ESP8266-Thing-Dev-v10.pdf)
+       * [ESP8266 Thin Dev Hookup Guide](https://learn.sparkfun.com/tutorials/esp8266-thing-development-board-hookup-guide?_ga=2.220320347.2139293805.1523318758-2093697505.1519119166)
+       * [ESP8266 Pin List](https://www.espressif.com/sites/default/files/documentation/0d-esp8266_pin_list_release_15-11-2014.xlsx)
+    * Flex Sensors (x5)
       * [Flex Sensors Datasheet](https://cdn.sparkfun.com/datasheets/Sensors/ForceFlex/FLEX%20SENSOR%20DATA%20SHEET%202014.pdf)
-
-* 47 kΩ Resistors (x5)
-
-* 74HC4051 Multiplexer (x1)
-    * [74HC4051 Datasheet](https://assets.nexperia.com/documents/data-sheet/74HC_HCT4051.pdf)
-
-
-* Wires
+    * 47 kΩ Resistors (x5)
+    * 74HC4051 Multiplexer (x1)
+        * [74HC4051 Datasheet](https://assets.nexperia.com/documents/data-sheet/74HC_HCT4051.pdf)
+    * Wires
 
 
-* Not used :
+* Not Used :
   * MPU6050 6 DOF IMU (x2)
       * [MPU6050 Datasheet](https://store.invensense.com/datasheets/invensense/MPU-6050_DataSheet_V3%204.pdf)  
 
@@ -72,7 +68,7 @@ Because the I2C bus on the ESP8266 is a software implementation and not a hardwa
 #### Schematic :
 
 <p align=center>
-<img src="img/fritzing.png" title="Github Logo">
+<img src="img/fritzing.png" title="schematic">
 </p>
 
 
@@ -101,13 +97,13 @@ git clone https://github.com/PI2-TEAM01/Flex
 
 4. Open the folder with platformIO
 <p align=center>
-<img src="img/open_project.png" title="Github Logo">
+<img src="img/open_project.png" title="Open Project">
 </p>
 
 #### Use Data with Processing IDE :
 
 <p align=center>
-<img src="img/processing_ide.png" title="Github Logo">
+<img src="img/processing_ide.png" title="Processing IDE">
 </p>
 
 At the end of the project, we thought of a 3D representation of the hand movements.

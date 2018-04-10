@@ -4,7 +4,7 @@
 Get all the analog values of the flex sensors using the 74HC4051 multiplexer
 
 ## STEP 2 :
- Set the communication between the 2 ESP8266 (client-server) with the glove as the server and the 3d printed hand as the client.
+ Set the communication between the two ESP8266 (client-server) with the glove as the server and the 3d printed hand as the client.
 
  Send all the values from the server to the client :
  * The two ESP8266 connect to the access point
@@ -12,7 +12,7 @@ Get all the analog values of the flex sensors using the 74HC4051 multiplexer
  * Each time the client connects  to the server, the server sends data
 
 ## STEP 3 :
-Receive all the data on the client-side and move servo motors in function of data received
+Reception of server data on the client-side and action of servo motors according to data received
 
 
 <center>
@@ -48,8 +48,8 @@ Receive all the data on the client-side and move servo motors in function of dat
   * MPU6050 6 DOF IMU (x2)
       * [MPU6050 Datasheet](https://store.invensense.com/datasheets/invensense/MPU-6050_DataSheet_V3%204.pdf)  
 
-Because we encountered some problems :
-the I2C bus on the ESP8266 is a software implementation not a hardware implmentation, it means that the driver for I2C  will  be responsible of the delay regulations between the ESP8266 and the I2C sensors. (to regulate the communication between the two). We have Tested the I2C driver APPROVED by Espressif (because there is no official I2C driver from Espressif) and other drivers made by internet programers but without success.
+We encountered some problems :
+Because the I2C bus on the ESP8266 is a software implementation and not a hardware implementation, it means that the driver for I2C  will  be responsible of the delay regulations between the ESP8266 and the I2C sensors. (to regulate the communication between the two). We have tested the I2C driver APPROVED by Espressif (because there is no official I2C driver from Espressif) and other drivers made by internet programers but without success.
 
 
 * To Do :
@@ -60,7 +60,7 @@ the I2C bus on the ESP8266 is a software implementation not a hardware implmenta
  * Change all the resistors
  * Add OP Amp(s)
  * Add a Battery (and add also a JST connector with it )
-     * https://www.sparkfun.com/products/9749
+     * [JST Connector](https://www.sparkfun.com/products/9749)
 
 
 #### Preview :
@@ -104,6 +104,20 @@ git clone https://github.com/PI2-TEAM01/Flex
 <img src="img/open_project.png" title="Github Logo">
 </p>
 
+#### Use Data with Processing IDE :
+
+<p align=center>
+<img src="img/processing_ide.png" title="Github Logo">
+</p>
+
+At the end of the project, we thought of a 3D representation of the hand movements.
+It is possible to do it BUT there is a problem because there is no constraints BETWEEN parts.
+There are only position constraints.
+Maybe we could build a new program to do so ...
+
+We got time to get the data of the glove and to visualize the data in an histogram.
+
+
 
 #### NOTE :
 
@@ -113,8 +127,8 @@ git clone https://github.com/PI2-TEAM01/Flex
 /home/$Your_Personal_Folder/.platformio/packages/framework-esp8266-rtos-sdk/include/espressif/esp8266/pin_mux_register.h
  ```
 
-* If you used ESPCONN objects and that you uploaded a new piece of code to the ESP8266 (that don't use ESPCONN objects at all), you will see that informations about network are still printed in the serial monitor ...
-In order to delete these parameters you need to execute in the user_init() the single line :
+* If you used ESPCONN objects and that you uploaded a new piece of code to the ESP8266 (that don't use ESPCONN objects at all), you will see that network information are still printed in the serial monitor ...
+In order to delete these parameters you need to execute in the user_init() the following single line :
 
  ```
 void user_init(void) {

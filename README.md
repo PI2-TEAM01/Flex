@@ -43,7 +43,7 @@ Reception of server data on the client-side and action of servo motors according
       * [MPU6050 Datasheet](https://store.invensense.com/datasheets/invensense/MPU-6050_DataSheet_V3%204.pdf)  
 
 We encountered some problems :
-Because the I2C bus on the ESP8266 is a software implementation and not a hardware implementation, it means that the driver for I2C  will  be responsible of the delay regulations between the ESP8266 and the I2C sensors. (to regulate the communication between the two). We have tested the I2C driver APPROVED by Espressif (because there is no official I2C driver from Espressif) and other drivers made by internet programers but without success.
+Because the I2C bus on the ESP8266 is a software implementation and not a hardware implementation, it means that the driver for I2C  will  be responsible of the delay regulations between the ESP8266 and the I2C sensors. (to regulate the communication between the two). We have tested the I2C driver APPROVED by Espressif because there is no official I2C driver from Espressif. (MPU-1) and other drivers made by internet programers but without success : [like in this article](https://esp8266hints.wordpress.com/2015/06/04/sdk-i2c-code-todays-duh-story/)
 
 
 * To Do :

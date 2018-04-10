@@ -1,6 +1,4 @@
-<p align=center>
-<h1>STEPS OF THE PROJECT :</h1>
-</p>
+<center><h1>STEPS OF THE PROJECT :</h1></center>
 
 ## STEP 1 :
 Get all the analog values of the flex sensors using the 74HC4051 multiplexer

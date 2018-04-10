@@ -49,11 +49,10 @@ Because the I2C bus on the ESP8266 is a software implementation and not a hardwa
 * To Do :
     * Change the ESP8266 to the ESP32
         * [ESP32 Ressources](https://www.espressif.com/en/products/hardware/esp32/resources)
-
- * Change all the resistors
- * Add OP Amp(s)
- * Add a Battery (and add also a JST connector with it )
-     * [JST Connector](https://www.sparkfun.com/products/9749)
+    * Change all the resistors
+    * Add OP Amp(s)
+    * Add a Battery (and add also a JST connector with it )
+        * [JST Connector](https://www.sparkfun.com/products/9749)
 
 
 #### Preview :

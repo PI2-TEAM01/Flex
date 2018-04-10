@@ -53,6 +53,7 @@ the I2C bus on the ESP8266 is software not hardware, it means that the driver fo
  * Change all the resistors
  * Add OP Amp(s)
  * Add a Battery (and add also a JST connector with it )
+     * [JST Connector](https://www.sparkfun.com/products/9749)
 
 #### Schematic :
 

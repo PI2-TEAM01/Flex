@@ -19,22 +19,39 @@ Send the values from the server to the client
 #### Components :
 * used :
   * ESP8266 Thing Dev (x1)
+   * [ESP8266 Datasheet](https://www.espressif.com/sites/default/files/documentation/0a-esp8266ex_datasheet_en.pdf)
+   * [ESP8266 Thing Dev graphical datasheet](https://cdn.sparkfun.com/datasheets/Wireless/WiFi/ESP8266ThingDevV1.pdf)
+   * [ESP8266 Thing Dev schematic](https://cdn.sparkfun.com/datasheets/Wireless/WiFi/ESP8266-Thing-Dev-v10.pdf)
+   * [ESP8266 Thin Dev Hookup Guide](https://learn.sparkfun.com/tutorials/esp8266-thing-development-board-hookup-guide?_ga=2.220320347.2139293805.1523318758-2093697505.1519119166)
+   * [ESP8266 Pin List](https://www.espressif.com/sites/default/files/documentation/0d-esp8266_pin_list_release_15-11-2014.xlsx)
+
+
   * Flex Sensors (x5)
-  * 47 kΩ resistors (x5)
+   * [Flex Sensors Datasheet](https://cdn.sparkfun.com/datasheets/Sensors/ForceFlex/FLEX%20SENSOR%20DATA%20SHEET%202014.pdf)
+
+* 47 kΩ resistors (x5)
+
   * 74HC4051 multiplexer (x1)
+   * [74HC4051 Datasheet](https://assets.nexperia.com/documents/data-sheet/74HC_HCT4051.pdf)
+
   * Wires
 
 
-* not used :
-  * MPU6050 6 DOF IMU (x2) :  
+* Not used :
+  * MPU6050 6 DOF IMU (x2)
+   * [MPU6050 Datasheet](https://store.invensense.com/datasheets/invensense/MPU-6050_DataSheet_V3%204.pdf)   
 Because we encountered some problems :
 the I2C bus on the ESP8266 is software not hardware, it means that the driver for I2C  will  be responsible of the delay regulations between the ESP8266 and the I2C sensors. (to regulate the communication between the two). We have Tested the I2C driver APPROVED by Espressif (because there is no official I2C driver from Espressif) and other drivers made by internet programers
 
 
-* to do :
+* To Do :
  * Change the ESP8266 to the ESP32
+   * [ESP32 Ressources](https://www.espressif.com/en/products/hardware/esp32/resources)
+
+
  * Change all the resistors
  * Add OP Amp(s)
+ * Add a Battery (and add also a JST connector with it )
 
 #### Schematic :
 

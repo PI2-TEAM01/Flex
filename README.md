@@ -46,8 +46,8 @@ the I2C bus on the ESP8266 is software not hardware, it means that the driver fo
 
 
 * To Do :
- * Change the ESP8266 to the ESP32
-   * [ESP32 Ressources](https://www.espressif.com/en/products/hardware/esp32/resources)
+    * Change the ESP8266 to the ESP32
+        * [ESP32 Ressources](https://www.espressif.com/en/products/hardware/esp32/resources)
 
 
  * Change all the resistors

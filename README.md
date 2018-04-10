@@ -88,7 +88,7 @@ Because the I2C bus on the ESP8266 is a software implementation and not a hardwa
 2. Install [PlatformIO](https://platformio.org/get-started/ide?install=atom)
 3. Then clone the repository
 ```
-git clone https://github.com/PI2-TEAM01/Flex
+git clone https://github.com/PI2-TEAM01/Flex.git
 ```
 
 4. Open the folder with platformIO
